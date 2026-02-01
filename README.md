@@ -75,10 +75,11 @@ npm install
 Create a `.env` file in the backend folder:
 
 ```env
-MONGODB_URI=MONGODB_URI=your_mongodb_atlas_connection_string
-JWT_SECRET=your_super_secret_jwt_key_change_in_production
+MONGODB_URI=<your-mongodb-atlas-connection-string>
+JWT_SECRET=<your-jwt-secret>
 PORT=5000
 FRONTEND_URL=http://localhost:3000
+
 ```
 
 Start the backend server:

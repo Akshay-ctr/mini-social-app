@@ -14,10 +14,13 @@ const postRoutes = require('./routes/posts');
 const app = express();
 
 // Middleware
+const allowedOrigin = process.env.FRONTEND_URL?.trim();
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: allowedOrigin,
   credentials: true
 }));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 

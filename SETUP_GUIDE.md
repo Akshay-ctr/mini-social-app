@@ -98,10 +98,11 @@ mini-social-app-complete/
    - Copy this content and **REPLACE** with your values:
 
    ```env
-   MONGODB_URI=mongodb+srv://miniuser:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/mini-social-app?retryWrites=true&w=majority
-   JWT_SECRET=my_super_secret_key_12345_change_this
-   PORT=5000
-   FRONTEND_URL=http://localhost:3000
+  MONGODB_URI=<your-mongodb-atlas-uri>
+JWT_SECRET=<your-jwt-secret>
+PORT=5000
+FRONTEND_URL=http://localhost:3000
+
    ```
 
    **Important:**

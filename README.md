@@ -75,7 +75,7 @@ npm install
 Create a `.env` file in the backend folder:
 
 ```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/mini-social-app
+MONGODB_URI=MONGODB_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_super_secret_jwt_key_change_in_production
 PORT=5000
 FRONTEND_URL=http://localhost:3000

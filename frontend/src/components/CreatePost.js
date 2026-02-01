@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Paper,
   TextField,
@@ -6,40 +6,39 @@ import {
   Box,
   Avatar,
   IconButton,
-  Typography,
-  Alert
-} from '@mui/material';
-import { PhotoCamera, Close } from '@mui/icons-material';
-import { useAuth } from '../context/AuthContext';
-import { postAPI } from '../services/api';
+  Alert,
+} from "@mui/material";
+import { PhotoCamera, Close } from "@mui/icons-material";
+import { useAuth } from "../context/AuthContext";
+import { postAPI } from "../services/api";
 
 const CreatePost = ({ onPostCreated }) => {
   const { user } = useAuth();
-  const [content, setContent] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [imagePreview, setImagePreview] = useState('');
+  const [content, setContent] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [imagePreview, setImagePreview] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleImageUrlChange = (e) => {
     const url = e.target.value;
     setImageUrl(url);
     setImagePreview(url);
-    setError('');
+    setError("");
   };
 
   const handleRemoveImage = () => {
-    setImageUrl('');
-    setImagePreview('');
+    setImageUrl("");
+    setImagePreview("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     // Validation
     if (!content.trim() && !imageUrl.trim()) {
-      setError('Please add either text content or an image URL');
+      setError("Please add either text content or an image URL");
       return;
     }
 
@@ -48,23 +47,23 @@ const CreatePost = ({ onPostCreated }) => {
     try {
       const postData = {
         content: content.trim(),
-        image: imageUrl.trim()
+        image: imageUrl.trim(),
       };
 
       await postAPI.createPost(postData);
 
       // Reset form
-      setContent('');
-      setImageUrl('');
-      setImagePreview('');
+      setContent("");
+      setImageUrl("");
+      setImagePreview("");
 
       // Notify parent component
       if (onPostCreated) {
         onPostCreated();
       }
     } catch (err) {
-      console.error('Error creating post:', err);
-      setError(err.response?.data?.message || 'Failed to create post');
+      console.error("Error creating post:", err);
+      setError(err.response?.data?.message || "Failed to create post");
     }
 
     setLoading(false);
@@ -72,7 +71,7 @@ const CreatePost = ({ onPostCreated }) => {
 
   return (
     <Paper elevation={2} sx={{ p: 2, mb: 3 }}>
-      <Box sx={{ display: 'flex', gap: 2 }}>
+      <Box sx={{ display: "flex", gap: 2 }}>
         <Avatar
           src={user?.profileImage}
           alt={user?.username}
@@ -91,7 +90,7 @@ const CreatePost = ({ onPostCreated }) => {
               value={content}
               onChange={(e) => {
                 setContent(e.target.value);
-                setError('');
+                setError("");
               }}
               variant="outlined"
               sx={{ mb: 2 }}
@@ -114,8 +113,8 @@ const CreatePost = ({ onPostCreated }) => {
                 size="small"
                 InputProps={{
                   startAdornment: (
-                    <PhotoCamera sx={{ mr: 1, color: 'action.active' }} />
-                  )
+                    <PhotoCamera sx={{ mr: 1, color: "action.active" }} />
+                  ),
                 }}
               />
             </Box>
@@ -124,36 +123,36 @@ const CreatePost = ({ onPostCreated }) => {
             {imagePreview && (
               <Box
                 sx={{
-                  position: 'relative',
+                  position: "relative",
                   mb: 2,
                   borderRadius: 2,
-                  overflow: 'hidden'
+                  overflow: "hidden",
                 }}
               >
                 <img
                   src={imagePreview}
                   alt="Preview"
                   style={{
-                    width: '100%',
-                    maxHeight: '300px',
-                    objectFit: 'cover'
+                    width: "100%",
+                    maxHeight: "300px",
+                    objectFit: "cover",
                   }}
                   onError={() => {
-                    setError('Invalid image URL');
-                    setImagePreview('');
+                    setError("Invalid image URL");
+                    setImagePreview("");
                   }}
                 />
                 <IconButton
                   onClick={handleRemoveImage}
                   sx={{
-                    position: 'absolute',
+                    position: "absolute",
                     top: 8,
                     right: 8,
-                    bgcolor: 'rgba(0, 0, 0, 0.5)',
-                    color: 'white',
-                    '&:hover': {
-                      bgcolor: 'rgba(0, 0, 0, 0.7)'
-                    }
+                    bgcolor: "rgba(0, 0, 0, 0.5)",
+                    color: "white",
+                    "&:hover": {
+                      bgcolor: "rgba(0, 0, 0, 0.7)",
+                    },
                   }}
                   size="small"
                 >
@@ -162,14 +161,14 @@ const CreatePost = ({ onPostCreated }) => {
               </Box>
             )}
 
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 type="submit"
                 variant="contained"
                 disabled={loading || (!content.trim() && !imageUrl.trim())}
                 sx={{ minWidth: 100 }}
               >
-                {loading ? 'Posting...' : 'Post'}
+                {loading ? "Posting..." : "Post"}
               </Button>
             </Box>
           </form>
